@@ -4,7 +4,7 @@
 
 module system (
 	input           clk,
-	output [8:0] 	io,
+	output [8:0]    io,
 
     output          heartbeat_led
 );
@@ -14,7 +14,7 @@ module system (
 
 // Firmware file
 	parameter HEX_FILE = "firmware.hex";
-
+    
 
 // Startup reset
     startup_reset RESET(
@@ -69,6 +69,7 @@ module system (
 	wire ram_valid;
 	
 	ram #(
+        .MEM_SIZE(MEM_SIZE),
         .HEX_FILE(HEX_FILE)
     ) RAM (
 		.clk			(clk),
@@ -83,7 +84,7 @@ module system (
 		.ram_ready		(ram_ready),
 		.ram_rdata		(ram_rdata)
 	);
-
+	
 
 // IO
 	wire io_ready;
